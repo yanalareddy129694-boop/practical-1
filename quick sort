@@ -1,0 +1,21 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+void quickSort(auto left, auto right) {
+    if (left >= right) return;
+    auto pivot = *left; // Pick first element as pivot
+    auto mid = std::partition(left, right, [pivot](int val) { return val < pivot; });
+    std::swap(*left, *(mid == left ? mid : mid - 1)); // Place pivot
+    
+    quickSort(left, mid);
+    quickSort(mid + (mid == left ? 1 : 0), right);
+}
+
+int main() {
+    std::vector<int> arr = {10, 7, 8, 9, 1, 5};
+    quickSort(arr.begin(), arr.end());
+    
+    for (int num : arr) std::cout << num << " "; // Output: 1 5 7 8 9 10
+}
+out put:1 5 7 8 9 10 
