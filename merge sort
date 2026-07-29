@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+void mergeSort(std::vector<int>& arr) {
+    if (arr.size() <= 1) return;
+
+    // Split array into two halves
+    size_t mid = arr.size() / 2;
+    std::vector<int> left(arr.begin(), arr.begin() + mid);
+    std::vector<int> right(arr.begin() + mid, arr.end());
+
+    // Recursively sort both halves
+    mergeSort(left);
+    mergeSort(right);
+
+    // Merge back in sorted order
+    std::merge(left.begin(), left.end(), right.begin(), right.end(), arr.begin());
+}
+
+int main() {
+    std::vector<int> arr = {38, 27, 43, 3, 9, 82, 10};
+    mergeSort(arr);
+
+    for (int num : arr) std::cout << num << " "; // Output: 3 9 10 27 38 43 82
+}
+
+out put :3 9 10 27 38 43 82 
